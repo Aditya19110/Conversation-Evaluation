@@ -19,5 +19,5 @@
   status = 200
 
 [dev]
-  command = "cd src/ui && npm start"
+  command = "npm start"
   port = 3000

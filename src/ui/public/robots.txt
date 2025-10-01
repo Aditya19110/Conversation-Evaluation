@@ -1,0 +1,3 @@
+# Conversation Evaluation Frontend
+
+This frontend is deployed to Netlify and connects to the API backend.
