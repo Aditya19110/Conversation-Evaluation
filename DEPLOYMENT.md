@@ -2,79 +2,79 @@
 
 This guide covers multiple options to deploy your Conversation Evaluation Benchmark to the web.
 
-## Option 1: Railway (Recommended - Easy & Free)
+## Option 1: Render (Recommended - Easy & Free)
 
-Railway is perfect for this project as it supports Docker and provides free hosting.
+Render is perfect for this project with excellent Docker support, free SSL, and managed databases.
 
-### Step-by-Step Railway Deployment:
+### Step-by-Step Render Deployment:
 
 1. **Prepare your project**
    - Push your code to GitHub
    - Make sure all files are committed
 
-2. **Sign up for Railway**
-   - Go to https://railway.app
+2. **Sign up for Render**
+   - Go to https://render.com
    - Sign up with your GitHub account
 
-3. **Deploy**
-   - Click "New Project"
-   - Select "Deploy from GitHub repo"
-   - Choose your repository
-   - Railway will automatically detect docker-compose.yml
-
-4. **Configure services**
-   - Railway will create services for each container
-   - Set environment variables if needed
-
-5. **Access your app**
-   - Railway provides a public URL
-   - Your API will be available at the provided URL
-
-### Railway Configuration Files:
-
-**railway.toml** (create this file):
-```toml
-[build]
-builder = "dockerfile"
-buildCommand = "docker-compose build"
-
-[deploy]
-startCommand = "docker-compose up"
-restartPolicyType = "on-failure"
-restartPolicyMaxRetries = 10
-
-[env]
-PORT = "8000"
-```
-
-## Option 2: Render (Free Tier Available)
-
-Render provides excellent Docker support and free SSL certificates.
-
-### Step-by-Step Render Deployment:
-
-1. **Create Render account**
-   - Go to https://render.com
-   - Sign up with GitHub
-
-2. **Create Web Service**
-   - Click "New" → "Web Service"
+3. **Create Web Service**
+   - Click "New +" → "Web Service"
    - Connect your GitHub repository
-   - Choose your branch (main)
+   - Choose your repository
 
-3. **Configure service**
-   - Name: `conversation-evaluation-api`
-   - Environment: `Docker`
-   - Build Command: `docker build -f docker/api/Dockerfile -t api .`
-   - Start Command: `python -m uvicorn src.api.main:app --host 0.0.0.0 --port $PORT`
+4. **Configure service**
+   - Environment: Docker
+   - Build and start commands are auto-detected
+   - Set environment variables
 
-4. **Add database**
-   - Create PostgreSQL database on Render
-   - Copy connection URL to environment variables
+5. **Add Database (Optional)**
+   - Create PostgreSQL database
+   - Connect via DATABASE_URL environment variable
 
-5. **Deploy**
-   - Click "Create Web Service"
-   - Render will build and deploy automatically
+6. **Deploy**
+   - Render builds and deploys automatically
+   - Get your live URL
+
+### Render Benefits:
+- Free SSL certificates
+- Automatic deployments
+- Managed PostgreSQL & Redis
+- 99.9% uptime SLA
+- Global CDN
+
+## Option 2: Netlify (For Frontend/Static Sites)
+
+Perfect for deploying the React UI component as a static site.
+
+### Step-by-Step Netlify Deployment:
+
+1. **Build React App**
+   ```bash
+   cd src/ui
+   npm run build
+   ```
+
+2. **Deploy to Netlify**
+   - Go to https://netlify.com
+   - Drag and drop your `build` folder
+   - Or connect GitHub repository
+
+3. **Configure Build Settings**
+   - Build command: `cd src/ui && npm run build`
+   - Publish directory: `src/ui/build`
+
+4. **Environment Variables**
+   - Add `REACT_APP_API_URL` pointing to your Render API
+
+5. **Custom Domain**
+   - Add your domain in Site Settings
+   - Configure DNS records
+
+### Netlify Benefits:
+- Global CDN
+- Instant deploys
+- Branch previews
+- Form handling
+- Edge functions
 
 ## Option 3: Heroku (Paid but Reliable)
 
@@ -137,9 +137,13 @@ Simple and cost-effective for medium-scale applications.
 
 ## Quick Start Recommendation
 
-**For beginners**: Use Railway - it's the easiest and provides a good free tier.
+**For API Backend**: Use Render - excellent Docker support, free tier, managed databases.
 
-**For production**: Use Render or AWS depending on your scale needs.
+**For Frontend UI**: Use Netlify - global CDN, instant deploys, perfect for React apps.
+
+**For Full Stack**: Deploy API on Render + UI on Netlify for best performance.
+
+**For Production**: Use Render Pro or AWS depending on your scale needs.
 
 ## Next Steps After Deployment
 
