@@ -20,6 +20,7 @@ requests>=2.31.0
 
 # Monitoring and logging
 loguru>=0.7.0
+pyyaml>=6.0
 
 # Development and testing (optional)
 pytest>=7.4.0

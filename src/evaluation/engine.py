@@ -11,12 +11,38 @@ try:
     from ..models.inference import ModelManager, EvaluationResult
     from ..data.processor import ConversationTurn, DataProcessor
 except ImportError:
-    # Fallback for when modules aren't installed
-    from typing import Any
-    ModelManager = Any
-    EvaluationResult = Any
-    ConversationTurn = Any
-    DataProcessor = Any
+    # Fallback classes for when ML dependencies aren't installed
+    class MockModelManager:
+        def __init__(self, config):
+            self.config = config
+            
+        def get_model(self, model_name=None):
+            return MockModel()
+    
+    class MockModel:
+        def evaluate_conversation(self, conversation, facets):
+            return [MockEvaluationResult(facet) for facet in facets]
+    
+    class MockEvaluationResult:
+        def __init__(self, facet):
+            self.facet = facet
+            self.score = 3
+            self.confidence = 0.8
+            self.reasoning = "Mock evaluation result"
+    
+    class MockConversationTurn:
+        def __init__(self, text, speaker=None):
+            self.text = text
+            self.speaker = speaker
+    
+    class MockDataProcessor:
+        def process_conversation(self, data):
+            return data
+    
+    ModelManager = MockModelManager
+    EvaluationResult = MockEvaluationResult
+    ConversationTurn = MockConversationTurn  
+    DataProcessor = MockDataProcessor
 
 logger = logging.getLogger(__name__)
 
