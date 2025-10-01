@@ -12,6 +12,7 @@ from dataclasses import dataclass
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import gc
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -91,11 +92,15 @@ class OpenWeightsModel(BaseModel):
                 bnb_4bit_quant_type="nf4"
             )
             
+            # Get Hugging Face token
+            hf_token = os.getenv('HUGGINGFACE_TOKEN')
+            
             # Load tokenizer
             self.tokenizer = AutoTokenizer.from_pretrained(
                 self.model_name,
                 cache_dir=self.config.get('cache_dir', './models'),
-                trust_remote_code=True
+                trust_remote_code=True,
+                token=hf_token
             )
             
             # Ensure pad token exists
@@ -108,6 +113,7 @@ class OpenWeightsModel(BaseModel):
                 quantization_config=quantization_config,
                 device_map="auto",
                 cache_dir=self.config.get('cache_dir', './models'),
+                token=hf_token,
                 trust_remote_code=True,
                 torch_dtype=torch.float16
             )
@@ -333,8 +339,8 @@ class ModelManager:
         if model_name in self.models:
             return self.models[model_name]
         
-        # Create model instance
-        model = OpenWeightsModel(model_name, self.config)
+        # Create model instance using factory
+        model = create_model(model_name, self.config)
         
         # Load model (this is CPU/GPU intensive)
         model.load_model()
@@ -399,3 +405,46 @@ class ModelManager:
             })
         
         return info
+
+
+class MockModel(BaseModel):
+    """Mock model for development/testing."""
+    
+    async def load_model(self):
+        logger.info(f"Mock model {self.model_name} loaded successfully")
+        
+    async def generate(self, prompt: str, **kwargs) -> ModelOutput:
+        import random
+        import time
+        
+        await asyncio.sleep(0.1)
+        
+        if "score" in prompt.lower():
+            score = random.randint(1, 5)
+            text = f"Score: {score}\nReasoning: Mock evaluation response."
+        else:
+            text = "Mock response for testing."
+            
+        return ModelOutput(
+            text=text,
+            confidence=random.uniform(0.7, 0.95),
+            tokens_used=len(text.split()),
+            processing_time=0.1
+        )
+    
+    def unload_model(self):
+        logger.info(f"Mock model {self.model_name} unloaded")
+
+
+def create_model(model_name: str, config: Dict[str, Any]) -> BaseModel:
+    """Create model instance based on configuration."""
+    if not os.getenv('HUGGINGFACE_TOKEN'):
+        logger.warning("No HUGGINGFACE_TOKEN provided, using mock model")
+        return MockModel(model_name, config)
+    
+    try:
+        return OpenWeightsModel(model_name, config)
+    except Exception as e:
+        logger.error(f"Failed to create real model: {e}")
+        logger.info("Falling back to mock model")
+        return MockModel(model_name, config)

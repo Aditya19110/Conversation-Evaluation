@@ -21,18 +21,18 @@ redis:
 
 # Model Configuration
 models:
-  default_model: "meta-llama/Llama-2-7b-chat-hf"
+  default_model: "microsoft/DialoGPT-medium"
   cache_dir: "./models"
-  max_length: 2048
-  batch_size: 8
+  max_length: 512
+  batch_size: 4
   temperature: 0.7
   
-  # Supported models (≤16B parameters)
   supported_models:
-    - "meta-llama/Llama-2-7b-chat-hf"
-    - "meta-llama/Meta-Llama-3-8B-Instruct"
-    - "Qwen/Qwen2-7B-Instruct"
-    - "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    - "microsoft/DialoGPT-medium"
+    - "microsoft/DialoGPT-small"
+    - "distilgpt2"
+    - "gpt2"
+    - "facebook/blenderbot-400M-distill"
 
 # Evaluation Configuration
 evaluation:

@@ -1,36 +1,44 @@
-# Quick Deployment Guide
+# Deployment Guide
 
-## Deploy to Netlify (Frontend) + Render (API)
+## Prerequisites
 
-### 1. Deploy API to Render
-1. Go to https://render.com → Login with GitHub
-2. "New +" → "Web Service" → Connect your repository
-3. **Settings**:
-   - Name: `conversation-evaluation-api`
-   - Environment: `Docker`
-   - Branch: `main`
-4. **Environment Variables**:
-   - `PORT=8000`
-   - `ENVIRONMENT=production`
-   - `CORS_ORIGINS=["https://your-netlify-url.netlify.app"]`
+1. Get Hugging Face token from https://huggingface.co/settings/tokens
+2. Create token with "Read" access
 
-### 2. Deploy Frontend to Netlify
-1. Go to https://netlify.com → Login with GitHub
-2. "Add new site" → "Import from Git" → Select repository
-3. **Build Settings**: Auto-detected from `netlify.toml`
-   - Build command: `cd src/ui && npm ci && npm run build`
-   - Publish directory: `src/ui/build`
-4. **Deploy**: Click "Deploy Site"
+## API Deployment (Render)
 
-### 3. Connect Services
-1. Copy your Netlify URL (e.g., `https://amazing-app-123.netlify.app`)
-2. Update Render API environment variable:
-   - `CORS_ORIGINS=["https://amazing-app-123.netlify.app"]`
-3. Update `netlify.toml` with your actual API URL if needed
+1. Go to https://render.com and login with GitHub
+2. Create new Web Service and connect repository
+3. Configure settings:
+   - Environment: Docker
+   - Branch: main
+4. Add environment variables:
+   ```
+   PORT=8000
+   ENVIRONMENT=production
+   CORS_ORIGINS=["https://your-netlify-url.netlify.app"]
+   HUGGINGFACE_TOKEN=hf_your_token_here
+   ```
 
-## Test Deployment
-- **API**: `https://your-api.onrender.com/health`
-- **Frontend**: Your Netlify URL
-- **Integration**: Test conversation evaluation in the UI
+## Frontend Deployment (Netlify)
 
-Your full-stack system is now live! 🚀
+1. Go to https://netlify.com and login with GitHub
+2. Create new site from Git repository
+3. Build settings are configured in netlify.toml
+4. Update REACT_APP_API_URL with your Render API URL
+
+## Configuration
+
+### Render Environment Variables
+- Add HUGGINGFACE_TOKEN to Render (API backend only)
+- Update CORS_ORIGINS with actual Netlify URL
+
+### Netlify Environment Variables  
+- REACT_APP_API_URL is configured in netlify.toml
+- Update with your actual Render API URL
+
+## Testing
+
+- API health: https://your-api.onrender.com/health
+- Frontend: your-netlify-url.netlify.app
+- Test conversation evaluation functionality
