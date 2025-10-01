@@ -11,7 +11,6 @@ try:
     from ..models.inference import ModelManager, EvaluationResult
     from ..data.processor import ConversationTurn, DataProcessor
 except ImportError:
-    # Fallback classes for when ML dependencies aren't installed
     class MockModelManager:
         def __init__(self, config):
             self.config = config

@@ -19,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class ModelOutput:
-    """Represents model output with confidence."""
     text: str
     confidence: float
     tokens_used: int
@@ -28,7 +27,6 @@ class ModelOutput:
 
 @dataclass
 class EvaluationResult:
-    """Represents evaluation result for a facet."""
     facet: str
     score: int
     confidence: float
@@ -36,15 +34,12 @@ class EvaluationResult:
 
 
 class BaseModel(ABC):
-    """Abstract base class for evaluation models."""
-    
     def __init__(self, model_name: str, config: Dict[str, Any]):
         self.model_name = model_name
         self.config = config
         self.device = self._get_device()
         
     def _get_device(self) -> str:
-        """Determine the best available device."""
         if torch.cuda.is_available():
             return "cuda"
         elif torch.backends.mps.is_available():
@@ -410,7 +405,7 @@ class ModelManager:
 class MockModel(BaseModel):
     """Mock model for development/testing."""
     
-    async def load_model(self):
+    def load_model(self):
         logger.info(f"Mock model {self.model_name} loaded successfully")
         
     async def generate(self, prompt: str, **kwargs) -> ModelOutput:
@@ -434,6 +429,19 @@ class MockModel(BaseModel):
     
     def unload_model(self):
         logger.info(f"Mock model {self.model_name} unloaded")
+    
+    def evaluate_conversation(self, conversation: str, facets: List[str]) -> List[EvaluationResult]:
+        """Mock conversation evaluation."""
+        import random
+        results = []
+        for facet in facets:
+            results.append(EvaluationResult(
+                facet=facet,
+                score=random.randint(1, 5),
+                confidence=random.uniform(0.7, 0.95),
+                reasoning=f"Mock evaluation for {facet}"
+            ))
+        return results
 
 
 def create_model(model_name: str, config: Dict[str, Any]) -> BaseModel:

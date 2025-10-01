@@ -9,20 +9,22 @@ import time
 import yaml
 from pathlib import Path
 
-from ..evaluation.engine import ConversationEvaluationEngine, ConversationEvaluation, BatchEvaluationResult
-from ..data.processor import ConversationTurn
-
-# Configure logging
+try:
+    from ..evaluation.engine import ConversationEvaluationEngine, ConversationEvaluation, BatchEvaluationResult
+    from ..data.processor import ConversationTurn
+except ImportError:
+    ConversationEvaluationEngine = None
+    ConversationEvaluation = None
+    BatchEvaluationResult = None
+    ConversationTurn = None
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Load configuration
 config_path = Path(__file__).parent.parent.parent / "configs" / "config.yaml"
 try:
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 except FileNotFoundError:
-    # Fallback config for deployment
     config = {
         'api': {
             'title': 'Conversation Evaluation API',
@@ -32,12 +34,14 @@ except FileNotFoundError:
         'models': {'default_model': 'mock'}
     }
 
-# Initialize evaluation engine
-try:
-    evaluation_engine = ConversationEvaluationEngine(config)
-except Exception as e:
-    logger.warning(f"Could not initialize full evaluation engine: {e}")
-    # Create a mock evaluation engine for deployment
+if ConversationEvaluationEngine:
+    try:
+        evaluation_engine = ConversationEvaluationEngine(config)
+    except Exception as e:
+        logger.warning(f"Could not initialize full evaluation engine: {e}")
+        ConversationEvaluationEngine = None
+
+if not ConversationEvaluationEngine:
     class MockEvaluationEngine:
         def __init__(self, config):
             self.config = config

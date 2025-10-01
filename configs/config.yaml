@@ -1,4 +1,3 @@
-# Application Configuration
 app:
   name: "Conversation Evaluation Benchmark"
   version: "1.0.0"
@@ -6,20 +5,17 @@ app:
   host: "0.0.0.0"
   port: 8000
 
-# Database Configuration
 database:
   url: "postgresql://eval_user:eval_password@localhost:5432/conversation_eval"
   pool_size: 10
   max_overflow: 20
   echo: false
 
-# Redis Configuration
 redis:
   url: "redis://localhost:6379"
   db: 0
   max_connections: 100
 
-# Model Configuration
 models:
   default_model: "microsoft/DialoGPT-medium"
   cache_dir: "./models"
@@ -34,20 +30,15 @@ models:
     - "gpt2"
     - "facebook/blenderbot-400M-distill"
 
-# Evaluation Configuration
 evaluation:
-  # Core facet categories
   facet_categories:
     - "linguistic_quality"
     - "pragmatics"
     - "safety"
     - "emotion"
   
-  # Scoring configuration
   score_range: [1, 2, 3, 4, 5]
   confidence_threshold: 0.7
-  
-  # Batch processing
   batch_size: 32
   max_facets_per_request: 100
 

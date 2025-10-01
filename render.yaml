@@ -1,22 +1,9 @@
-version: 2
 services:
   - type: web
-    name: conversation-eval-api
-    env: docker
-    dockerfilePath: ./docker/api/Dockerfile
-    plan: free
+    name: conversation-evaluation-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
     envVars:
-      - key: PORT
-        value: 8000
-      - key: ENVIRONMENT
-        value: production
-    
-  - type: pserv
-    name: conversation-eval-db
-    env: docker
-    dockerfilePath: ./docker/postgres/Dockerfile
-    plan: free
-    disk:
-      name: postgres-data
-      mountPath: /var/lib/postgresql/data
-      sizeGB: 1
+      - key: HUGGINGFACE_TOKEN
+        sync: false

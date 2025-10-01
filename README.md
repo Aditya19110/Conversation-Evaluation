@@ -1,53 +1,29 @@
 # Conversation Evaluation Benchmark
 
-Production-ready system for evaluating conversations across 300+ facets using open-weights language models.
+System for evaluating conversations across 300+ facets using open-weights models.
 
 ## Features
 
-- Multi-facet conversation evaluation (300+ facets, scalable to 5000+)
-- Open-weights model support (≤16B parameters)
-- Confidence estimation for all scores
-- Real-time web interface
+- Multi-facet conversation evaluation
+- Open-weights model support
+- Real-time web interface  
 - RESTful API endpoints
 - Docker containerization
 
 ## Architecture
 
-### Core Components
-
-1. **Data Pipeline** (`src/data/`)
-   - Facet dataset preprocessing
-   - Conversation data cleaning
-   - Feature engineering
-
-2. **Model Service** (`src/models/`)
-   - Open-weights model integration (Llama 3-8B, Qwen2-8B, Mixtral 8×7B MoE)
-   - Efficient inference pipeline
-   - Batch processing capabilities
-
-3. **Evaluation Engine** (`src/evaluation/`)
-   - Multi-facet scoring system
-   - Confidence estimation
-   - Scalable architecture for 5000+ facets
-
-4. **API Service** (`src/api/`)
-   - RESTful API endpoints
-   - Real-time evaluation
-   - Batch processing support
-
-5. **Web UI** (`src/ui/`)
-   - Interactive conversation evaluation
-   - Facet scoring visualization
-   - Confidence metrics display
+- **Data Pipeline** - Processing and cleaning
+- **Model Service** - Lightweight model integration
+- **Evaluation Engine** - Multi-facet scoring
+- **API Service** - RESTful endpoints
+- **Web UI** - Interactive interface
 
 ## Tech Stack
 
-- **Backend**: Python, FastAPI, Pydantic
-- **ML/AI**: Transformers, PyTorch, Hugging Face
-- **Frontend**: React, TypeScript, Chart.js
-- **Database**: PostgreSQL, Redis (caching)
-- **Containerization**: Docker, Docker Compose
-- **Deployment**: Docker Swarm/K8s ready
+- Backend: Python, FastAPI
+- Frontend: React, TypeScript
+- Database: PostgreSQL, Redis
+- Deployment: Docker
 
 ## Project Structure
 
