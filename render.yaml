@@ -1,0 +1,22 @@
+version: 2
+services:
+  - type: web
+    name: conversation-eval-api
+    env: docker
+    dockerfilePath: ./docker/api/Dockerfile
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: ENVIRONMENT
+        value: production
+    
+  - type: pserv
+    name: conversation-eval-db
+    env: docker
+    dockerfilePath: ./docker/postgres/Dockerfile
+    plan: free
+    disk:
+      name: postgres-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
