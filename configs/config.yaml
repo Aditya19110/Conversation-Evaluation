@@ -1,0 +1,145 @@
+# Application Configuration
+app:
+  name: "Conversation Evaluation Benchmark"
+  version: "1.0.0"
+  debug: false
+  host: "0.0.0.0"
+  port: 8000
+
+# Database Configuration
+database:
+  url: "postgresql://eval_user:eval_password@localhost:5432/conversation_eval"
+  pool_size: 10
+  max_overflow: 20
+  echo: false
+
+# Redis Configuration
+redis:
+  url: "redis://localhost:6379"
+  db: 0
+  max_connections: 100
+
+# Model Configuration
+models:
+  default_model: "meta-llama/Llama-2-7b-chat-hf"
+  cache_dir: "./models"
+  max_length: 2048
+  batch_size: 8
+  temperature: 0.7
+  
+  # Supported models (≤16B parameters)
+  supported_models:
+    - "meta-llama/Llama-2-7b-chat-hf"
+    - "meta-llama/Meta-Llama-3-8B-Instruct"
+    - "Qwen/Qwen2-7B-Instruct"
+    - "mistralai/Mixtral-8x7B-Instruct-v0.1"
+
+# Evaluation Configuration
+evaluation:
+  # Core facet categories
+  facet_categories:
+    - "linguistic_quality"
+    - "pragmatics"
+    - "safety"
+    - "emotion"
+  
+  # Scoring configuration
+  score_range: [1, 2, 3, 4, 5]
+  confidence_threshold: 0.7
+  
+  # Batch processing
+  batch_size: 32
+  max_facets_per_request: 100
+
+# Facet Definitions
+facets:
+  linguistic_quality:
+    - "grammar"
+    - "coherence"
+    - "fluency"
+    - "vocabulary_richness"
+    - "syntax_complexity"
+    - "clarity"
+    - "conciseness"
+    - "word_choice"
+    
+  pragmatics:
+    - "context_understanding"
+    - "appropriateness"
+    - "relevance"
+    - "turn_taking"
+    - "topic_maintenance"
+    - "informativeness"
+    - "cooperation"
+    - "politeness"
+    
+  safety:
+    - "toxicity"
+    - "bias"
+    - "harmful_content"
+    - "privacy_violation"
+    - "misinformation"
+    - "hate_speech"
+    - "violence"
+    - "self_harm"
+    
+  emotion:
+    - "sentiment"
+    - "emotional_appropriateness"
+    - "empathy"
+    - "emotional_intelligence"
+    - "mood_detection"
+    - "emotional_stability"
+    - "compassion"
+    - "understanding"
+
+# API Configuration
+api:
+  title: "Conversation Evaluation API"
+  description: "Production-ready benchmark for conversation evaluation"
+  version: "1.0.0"
+  docs_url: "/docs"
+  redoc_url: "/redoc"
+  
+  # Rate limiting
+  rate_limit:
+    requests_per_minute: 60
+    requests_per_hour: 1000
+  
+  # CORS settings
+  cors:
+    allow_origins: ["*"]
+    allow_methods: ["*"]
+    allow_headers: ["*"]
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name}:{function}:{line} | {message}"
+  file: "logs/app.log"
+  rotation: "1 day"
+  retention: "1 month"
+
+# Monitoring Configuration
+monitoring:
+  prometheus:
+    enabled: true
+    port: 9090
+  
+  health_check:
+    enabled: true
+    endpoint: "/health"
+    
+# Performance Configuration
+performance:
+  workers: 4
+  max_requests: 1000
+  max_requests_jitter: 100
+  timeout: 300
+  keep_alive: 2
+
+# Security Configuration
+security:
+  secret_key: "your-secret-key-change-in-production"
+  algorithm: "HS256"
+  access_token_expire_minutes: 1440

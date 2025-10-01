@@ -1,0 +1,579 @@
+[
+  {
+    "id": "prof_001",
+    "text": "Good morning! I hope you're having a wonderful day. Could you please help me understand the project requirements?",
+    "context": "Professional workplace interaction",
+    "category": "professional",
+    "description": "Polite professional greeting with clear request",
+    "expected_scores": {
+      "politeness": 5,
+      "clarity": 4,
+      "appropriateness": 5,
+      "grammar": 5,
+      "empathy": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "prof_002",
+    "text": "Thank you so much for your detailed explanation. It really helped me understand the process better.",
+    "context": "Follow-up professional conversation",
+    "category": "professional",
+    "description": "Expressing gratitude professionally",
+    "expected_scores": {
+      "politeness": 5,
+      "clarity": 5,
+      "empathy": 4,
+      "grammar": 5,
+      "appropriateness": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "prof_003",
+    "text": "I apologize for the delay in my response. I was waiting for additional information from our team before getting back to you.",
+    "context": "Professional apology",
+    "category": "professional",
+    "description": "Professional apology with explanation",
+    "expected_scores": {
+      "politeness": 5,
+      "clarity": 4,
+      "appropriateness": 5,
+      "grammar": 5,
+      "empathy": 3,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "casual_001",
+    "text": "Hey! How's it going? I heard you got that promotion - congratulations!",
+    "context": "Casual friendly conversation",
+    "category": "casual",
+    "description": "Friendly casual congratulations",
+    "expected_scores": {
+      "politeness": 4,
+      "clarity": 4,
+      "empathy": 5,
+      "grammar": 4,
+      "appropriateness": 4,
+      "sentiment": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "casual_002",
+    "text": "Thanks for hanging out with me today! I had such a great time catching up.",
+    "context": "End of casual meetup",
+    "category": "casual",
+    "description": "Expressing enjoyment after social gathering",
+    "expected_scores": {
+      "politeness": 4,
+      "clarity": 5,
+      "empathy": 4,
+      "grammar": 4,
+      "sentiment": 5,
+      "appropriateness": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "casual_003",
+    "text": "Haha, that's hilarious! You always know how to make me laugh.",
+    "context": "Response to humor",
+    "category": "casual",
+    "description": "Positive response to humor",
+    "expected_scores": {
+      "politeness": 3,
+      "clarity": 4,
+      "empathy": 4,
+      "grammar": 3,
+      "sentiment": 5,
+      "appropriateness": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "service_001",
+    "text": "I understand your frustration, and I'm here to help resolve this issue as quickly as possible. Let me look into this for you right away.",
+    "context": "Customer service response",
+    "category": "customer_service",
+    "description": "Empathetic customer service response",
+    "expected_scores": {
+      "empathy": 5,
+      "politeness": 5,
+      "appropriateness": 5,
+      "clarity": 4,
+      "grammar": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "service_002",
+    "text": "I apologize for the inconvenience this has caused. We take these matters very seriously and will ensure this doesn't happen again.",
+    "context": "Customer service apology",
+    "category": "customer_service",
+    "description": "Formal customer service apology",
+    "expected_scores": {
+      "empathy": 4,
+      "politeness": 5,
+      "appropriateness": 5,
+      "grammar": 5,
+      "clarity": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "service_003",
+    "text": "Great question! Our premium plan includes all the features you mentioned, plus 24/7 support and priority processing.",
+    "context": "Product inquiry response",
+    "category": "customer_service",
+    "description": "Informative product explanation",
+    "expected_scores": {
+      "clarity": 5,
+      "appropriateness": 5,
+      "politeness": 4,
+      "grammar": 5,
+      "informativeness": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "edu_001",
+    "text": "Let me break this down step by step. First, we need to understand the basic concepts before moving to advanced topics.",
+    "context": "Teaching explanation",
+    "category": "educational",
+    "description": "Clear instructional explanation",
+    "expected_scores": {
+      "clarity": 5,
+      "appropriateness": 5,
+      "grammar": 5,
+      "coherence": 5,
+      "informativeness": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "edu_002",
+    "text": "That's an excellent question! It shows you're really thinking about the material. The answer involves several factors...",
+    "context": "Responding to student question",
+    "category": "educational",
+    "description": "Encouraging educational response",
+    "expected_scores": {
+      "empathy": 4,
+      "clarity": 4,
+      "appropriateness": 5,
+      "grammar": 5,
+      "politeness": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "edu_003",
+    "text": "Remember, there's no such thing as a stupid question. Learning is a process, and everyone progresses at their own pace.",
+    "context": "Encouraging struggling student",
+    "category": "educational",
+    "description": "Supportive educational encouragement",
+    "expected_scores": {
+      "empathy": 5,
+      "appropriateness": 5,
+      "clarity": 4,
+      "grammar": 5,
+      "emotional_appropriateness": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "support_001",
+    "text": "I can hear that you're going through a really difficult time. Your feelings are completely valid, and it's okay to feel overwhelmed.",
+    "context": "Emotional support conversation",
+    "category": "support",
+    "description": "Validating emotional support",
+    "expected_scores": {
+      "empathy": 5,
+      "emotional_appropriateness": 5,
+      "clarity": 4,
+      "grammar": 5,
+      "appropriateness": 5,
+      "compassion": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "support_002",
+    "text": "You've shown incredible strength in dealing with this situation. Remember that it's okay to ask for help when you need it.",
+    "context": "Encouraging someone in difficulty",
+    "category": "support",
+    "description": "Acknowledging strength and offering support",
+    "expected_scores": {
+      "empathy": 5,
+      "emotional_appropriateness": 5,
+      "clarity": 4,
+      "grammar": 4,
+      "compassion": 5,
+      "appropriateness": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "conflict_001",
+    "text": "I understand we have different perspectives on this issue. Perhaps we can find a solution that works for both of us.",
+    "context": "Conflict resolution attempt",
+    "category": "conflict_resolution",
+    "description": "Diplomatic conflict resolution approach",
+    "expected_scores": {
+      "appropriateness": 5,
+      "empathy": 4,
+      "clarity": 4,
+      "grammar": 5,
+      "politeness": 4,
+      "cooperation": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "conflict_002",
+    "text": "I appreciate you sharing your concerns with me. Let's work together to address these issues constructively.",
+    "context": "Responding to criticism",
+    "category": "conflict_resolution",
+    "description": "Constructive response to criticism",
+    "expected_scores": {
+      "appropriateness": 5,
+      "empathy": 4,
+      "politeness": 5,
+      "grammar": 5,
+      "cooperation": 5,
+      "emotional_stability": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "tech_001",
+    "text": "The algorithm processes data through multiple layers, each extracting different features. Think of it like a filter that refines information at each step.",
+    "context": "Technical explanation with analogy",
+    "category": "technical",
+    "description": "Technical concept explained with analogy",
+    "expected_scores": {
+      "clarity": 4,
+      "informativeness": 5,
+      "grammar": 5,
+      "coherence": 4,
+      "appropriateness": 4,
+      "vocabulary_richness": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "tech_002",
+    "text": "To troubleshoot this issue, we need to check three things: the network connection, the database configuration, and the API endpoints.",
+    "context": "Technical troubleshooting",
+    "category": "technical",
+    "description": "Clear technical troubleshooting steps",
+    "expected_scores": {
+      "clarity": 5,
+      "informativeness": 5,
+      "grammar": 5,
+      "coherence": 5,
+      "appropriateness": 5,
+      "conciseness": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "problem_001",
+    "text": "You're absolutely wrong and clearly don't understand anything about this topic. This is a waste of my time.",
+    "context": "Hostile disagreement",
+    "category": "problematic",
+    "description": "Dismissive and hostile response",
+    "expected_scores": {
+      "politeness": 1,
+      "appropriateness": 1,
+      "empathy": 1,
+      "grammar": 4,
+      "toxicity": 4,
+      "emotional_appropriateness": 1,
+      "bias": 2
+    }
+  },
+  {
+    "id": "problem_002",
+    "text": "I don't have time to explain this to someone who obviously can't grasp basic concepts.",
+    "context": "Condescending response",
+    "category": "problematic",
+    "description": "Condescending and dismissive",
+    "expected_scores": {
+      "politeness": 1,
+      "appropriateness": 1,
+      "empathy": 1,
+      "grammar": 4,
+      "toxicity": 3,
+      "bias": 3,
+      "emotional_appropriateness": 1
+    }
+  },
+  {
+    "id": "unclear_001",
+    "text": "Yeah, so like, the thing we talked about before... you know what I mean? It's kinda complicated but not really.",
+    "context": "Vague reference to previous conversation",
+    "category": "unclear",
+    "description": "Very vague and unclear communication",
+    "expected_scores": {
+      "clarity": 1,
+      "coherence": 2,
+      "grammar": 2,
+      "informativeness": 1,
+      "appropriateness": 2,
+      "conciseness": 2,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "unclear_002",
+    "text": "The project, well, it's going... there are some challenges but also opportunities, if you know what I mean.",
+    "context": "Project status update",
+    "category": "unclear",
+    "description": "Evasive and uninformative response",
+    "expected_scores": {
+      "clarity": 2,
+      "informativeness": 1,
+      "grammar": 3,
+      "coherence": 2,
+      "appropriateness": 2,
+      "conciseness": 2,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "cultural_001",
+    "text": "Namaste! I hope you and your family are in good health. I wanted to discuss the upcoming festival arrangements.",
+    "context": "Cultural greeting in diverse workplace",
+    "category": "cultural",
+    "description": "Culturally inclusive greeting",
+    "expected_scores": {
+      "politeness": 5,
+      "appropriateness": 5,
+      "empathy": 4,
+      "grammar": 5,
+      "cultural_sensitivity": 5,
+      "clarity": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "cultural_002",
+    "text": "In my culture, we have a saying that translates to 'patience brings wisdom.' I think this applies to our current situation.",
+    "context": "Sharing cultural wisdom",
+    "category": "cultural",
+    "description": "Sharing cultural perspective constructively",
+    "expected_scores": {
+      "appropriateness": 5,
+      "clarity": 4,
+      "grammar": 5,
+      "empathy": 4,
+      "cultural_sensitivity": 5,
+      "wisdom": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "crisis_001",
+    "text": "I understand this is an urgent situation. I'm escalating this immediately to our emergency response team and will keep you updated every step of the way.",
+    "context": "Emergency response",
+    "category": "crisis",
+    "description": "Professional emergency response",
+    "expected_scores": {
+      "appropriateness": 5,
+      "clarity": 5,
+      "empathy": 4,
+      "grammar": 5,
+      "responsiveness": 5,
+      "professionalism": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "crisis_002",
+    "text": "Please stay calm. Help is on the way. Can you tell me your exact location and describe what's happening?",
+    "context": "Emergency assistance call",
+    "category": "crisis",
+    "description": "Calming emergency assistance",
+    "expected_scores": {
+      "appropriateness": 5,
+      "clarity": 5,
+      "empathy": 4,
+      "grammar": 5,
+      "calmness": 5,
+      "helpfulness": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "creative_001",
+    "text": "Imagine a world where colors have flavors and music creates visible patterns in the air. What would your favorite song taste like?",
+    "context": "Creative conversation starter",
+    "category": "creative",
+    "description": "Imaginative and engaging question",
+    "expected_scores": {
+      "creativity": 5,
+      "clarity": 4,
+      "grammar": 5,
+      "appropriateness": 4,
+      "engagement": 5,
+      "imagination": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "creative_002",
+    "text": "Your idea reminds me of a story where every word someone spoke became a butterfly that carried their intentions to others.",
+    "context": "Creative response to idea",
+    "category": "creative",
+    "description": "Creative metaphorical response",
+    "expected_scores": {
+      "creativity": 5,
+      "clarity": 4,
+      "grammar": 4,
+      "appropriateness": 4,
+      "imagination": 5,
+      "engagement": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "misc_001",
+    "text": "I'm sorry, but I don't have enough information to answer that question accurately. Could you provide more details?",
+    "context": "Admitting knowledge limitation",
+    "category": "honest_limitation",
+    "description": "Honest admission of knowledge limitation",
+    "expected_scores": {
+      "honesty": 5,
+      "appropriateness": 5,
+      "politeness": 4,
+      "grammar": 5,
+      "clarity": 4,
+      "humility": 4,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "misc_002",
+    "text": "Congratulations on your achievement! Your hard work and dedication really paid off. You should be proud of yourself.",
+    "context": "Celebrating someone's success",
+    "category": "celebration",
+    "description": "Genuine celebration of achievement",
+    "expected_scores": {
+      "empathy": 5,
+      "positivity": 5,
+      "appropriateness": 5,
+      "grammar": 5,
+      "encouragement": 5,
+      "clarity": 5,
+      "toxicity": 1,
+      "bias": 1
+    }
+  },
+  {
+    "id": "question_001",
+    "text": "Could you please explain how this process works? I'm having trouble understanding the steps involved.",
+    "context": "Generated inquiry example",
+    "category": "inquiry",
+    "description": "Template-generated inquiry conversation",
+    "expected_scores": {
+      "grammar": 4,
+      "clarity": 4,
+      "appropriateness": 5,
+      "toxicity": 1,
+      "bias": 1,
+      "politeness": 4
+    }
+  },
+  {
+    "id": "feedback_001",
+    "text": "I really appreciate the effort you put into this project. The attention to detail is impressive.",
+    "context": "Generated positive_feedback example",
+    "category": "positive_feedback",
+    "description": "Template-generated positive_feedback conversation",
+    "expected_scores": {
+      "grammar": 4,
+      "clarity": 4,
+      "appropriateness": 5,
+      "toxicity": 1,
+      "bias": 1,
+      "empathy": 4,
+      "positivity": 5
+    }
+  },
+  {
+    "id": "suggestion_001",
+    "text": "I have an idea that might help improve efficiency. Would you be interested in hearing it?",
+    "context": "Generated suggestion example",
+    "category": "suggestion",
+    "description": "Template-generated suggestion conversation",
+    "expected_scores": {
+      "grammar": 4,
+      "clarity": 4,
+      "appropriateness": 5,
+      "toxicity": 1,
+      "bias": 1,
+      "politeness": 5,
+      "collaboration": 4
+    }
+  },
+  {
+    "id": "clarification_001",
+    "text": "Just to make sure I understand correctly, you're saying that we should prioritize the client requests first?",
+    "context": "Generated clarification example",
+    "category": "clarification",
+    "description": "Template-generated clarification conversation",
+    "expected_scores": {
+      "grammar": 4,
+      "clarity": 4,
+      "appropriateness": 5,
+      "toxicity": 1,
+      "bias": 1,
+      "attention_to_detail": 4
+    }
+  },
+  {
+    "id": "scheduling_001",
+    "text": "I'm available for the meeting on Tuesday or Wednesday afternoon. What works best for your schedule?",
+    "context": "Generated scheduling example",
+    "category": "scheduling",
+    "description": "Template-generated scheduling conversation",
+    "expected_scores": {
+      "grammar": 4,
+      "clarity": 5,
+      "appropriateness": 4,
+      "toxicity": 1,
+      "bias": 1,
+      "politeness": 4,
+      "flexibility": 5
+    }
+  }
+]
