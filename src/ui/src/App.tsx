@@ -27,6 +27,7 @@ import {
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
+import { API_BASE_URL } from './config.ts';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -75,7 +76,7 @@ function App() {
 
   const fetchAvailableModels = async () => {
     try {
-      const response = await axios.get('/models');
+      const response = await axios.get(`${API_BASE_URL}/models`);
       setAvailableModels(response.data);
       if (response.data.length > 0) {
         setSelectedModel(response.data[0]);
@@ -109,7 +110,7 @@ function App() {
         model_name: selectedModel || undefined
       };
 
-      const response = await axios.post('/evaluate', requestData);
+      const response = await axios.post(`${API_BASE_URL}/evaluate`, requestData);
       setEvaluationResult(response.data);
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Error evaluating conversation');
