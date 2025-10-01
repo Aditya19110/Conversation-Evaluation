@@ -97,12 +97,18 @@ celerybeat.pid
 
 # Environments
 .env
+.env.local
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Keep development and production env files for deployment
+!.env.example
+!src/ui/.env.development
+!src/ui/.env.production
 
 # Spyder project settings
 .spyderproject

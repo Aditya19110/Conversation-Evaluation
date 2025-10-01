@@ -4,12 +4,13 @@
   command = "npm run build"
 
 [build.environment]
-  REACT_APP_API_URL = "https://your-api.onrender.com"
+  REACT_APP_API_URL = "https://conversation-evaluation-zmt7.onrender.com"
   NODE_VERSION = "18"
+  CI = "false"
 
 [[redirects]]
   from = "/api/*"
-  to = "https://your-api.onrender.com/:splat"
+  to = "https://conversation-evaluation-zmt7.onrender.com/:splat"
   status = 200
   force = true
 
