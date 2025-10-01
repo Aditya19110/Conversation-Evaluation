@@ -7,3 +7,6 @@ services:
     envVars:
       - key: HUGGINGFACE_TOKEN
         sync: false
+      - key: PYTHONPATH
+        value: "/opt/render/project/src"
+    healthCheckPath: /health

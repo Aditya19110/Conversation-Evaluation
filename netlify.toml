@@ -2,6 +2,17 @@
   publish = "src/ui/build"
   command = "cd src/ui && npm ci && npm run build"
 
+[build.environment]
+  REACT_APP_API_URL = "https://conversation-evaluation-zmt7.onrender.com"
+  NODE_VERSION = "18"
+  CI = "false"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://conversation-evaluation-zmt7.onrender.com/:splat"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
