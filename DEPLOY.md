@@ -1,105 +1,36 @@
-# Deployment Guide
+# Quick Deployment Guide
 
-Deploy your Conversation Evaluation system with API on Render and Frontend on Netlify.
+## Deploy to Netlify (Frontend) + Render (API)
 
-## Architecture
-```
-React Frontend (Netlify) ← → Python API (Render) ← → Database (Render)
-```
-
-## Part 1: Deploy API Backend (Render)
-
-### Step 1: Push to GitHub
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/yourusername/conversation-evaluation.git
-git push -u origin main
-```
-
-### Step 2: Deploy API
-1. **Go to Render**: https://render.com → Login with GitHub
-2. **Create Web Service**: "New +" → "Web Service" → Connect repository
-3. **Configure**:
+### 1. Deploy API to Render
+1. Go to https://render.com → Login with GitHub
+2. "New +" → "Web Service" → Connect your repository
+3. **Settings**:
    - Name: `conversation-evaluation-api`
    - Environment: `Docker`
    - Branch: `main`
 4. **Environment Variables**:
    - `PORT=8000`
    - `ENVIRONMENT=production`
-   - `CORS_ORIGINS=["https://your-app.netlify.app"]`
-5. **Deploy**: Wait 3-5 minutes
+   - `CORS_ORIGINS=["https://your-netlify-url.netlify.app"]`
 
-**Your API**: `https://conversation-evaluation-api.onrender.com`
+### 2. Deploy Frontend to Netlify
+1. Go to https://netlify.com → Login with GitHub
+2. "Add new site" → "Import from Git" → Select repository
+3. **Build Settings**: Auto-detected from `netlify.toml`
+   - Build command: `cd src/ui && npm ci && npm run build`
+   - Publish directory: `src/ui/build`
+4. **Deploy**: Click "Deploy Site"
 
-## Part 2: Deploy Frontend (Netlify)
+### 3. Connect Services
+1. Copy your Netlify URL (e.g., `https://amazing-app-123.netlify.app`)
+2. Update Render API environment variable:
+   - `CORS_ORIGINS=["https://amazing-app-123.netlify.app"]`
+3. Update `netlify.toml` with your actual API URL if needed
 
-### Step 1: Update API URL
-Update your API URL in `netlify.toml` environment section and `src/ui/.env.production`:
-```bash
-REACT_APP_API_URL=https://your-actual-api.onrender.com
-```
+## Test Deployment
+- **API**: `https://your-api.onrender.com/health`
+- **Frontend**: Your Netlify URL
+- **Integration**: Test conversation evaluation in the UI
 
-### Step 2: Deploy Frontend
-1. **Go to Netlify**: https://netlify.com → Login with GitHub
-2. **New Site**: "Add new site" → "Import from Git"
-3. **Build Settings**:
-   - Build command: `npm run build` (Netlify will auto-detect from netlify.toml)
-   - Publish directory: `build` (relative to base: src/ui)
-   - Base directory: `src/ui`
-4. **Environment Variables**: Already configured in netlify.toml
-
-**Your Frontend**: `https://conversation-eval.netlify.app`
-
-## Part 3: Connect Services
-
-### Update API CORS
-In `src/api/main.py`, update CORS:
-```python
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "https://conversation-eval.netlify.app",  # Your Netlify URL
-        "http://localhost:3000"  # Local development
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-```
-Redeploy API after this change.
-
-## Testing Your Deployment
-
-### API Tests
-- Health: `https://your-api.onrender.com/health`
-- Docs: `https://your-api.onrender.com/docs`
-
-### Frontend Tests  
-- Visit your Netlify URL
-- Test conversation evaluation
-- Check API connection status
-
-## Optional: Database Setup
-
-1. **Create PostgreSQL**: Render → "New +" → "PostgreSQL"
-2. **Connect**: Add `DATABASE_URL` environment variable to API
-
-## Environment Variables Summary
-
-### API (Render)
-- `PORT=8000`
-- `ENVIRONMENT=production`
-- `CORS_ORIGINS=["https://your-netlify-url.netlify.app"]`
-- `DATABASE_URL=...` (optional)
-
-### Frontend (Netlify)
-- `REACT_APP_API_URL=https://your-api.onrender.com`
-
-## Cost
-- **Free Tier**: API + Frontend + Database all free
-- **Paid**: $7/month for always-on API (optional)
-
-Your full-stack conversation evaluation system is now live!
+Your full-stack system is now live! 🚀

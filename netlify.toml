@@ -1,7 +1,6 @@
 [build]
-  base = "src/ui"
-  publish = "build"
-  command = "npm run build"
+  publish = "src/ui/build"
+  command = "cd src/ui && npm ci && npm run build"
 
 [build.environment]
   REACT_APP_API_URL = "https://conversation-evaluation-zmt7.onrender.com"
@@ -20,5 +19,5 @@
   status = 200
 
 [dev]
-  command = "npm start"
+  command = "cd src/ui && npm start"
   port = 3000
